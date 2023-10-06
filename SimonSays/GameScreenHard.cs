@@ -1,35 +1,29 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Drawing;
 using System.Data;
+using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Media;
-using System.Drawing.Drawing2D;
 using System.Threading;
 
 namespace SimonSays
 {
-    public partial class GameScreen : UserControl
+    public partial class GameScreenHard : UserControl
     {
+        int guess2;
+        int pattPatt2;
 
-        public static int guess;
-        int pattPatt;
-        public static int final;
-
-
-
-        public GameScreen()
+        public GameScreenHard()
         {
             InitializeComponent();
         }
-
-        private void GameScreen_Load(object sender, EventArgs e)
+        private void GameScreenHard_Load(object sender, EventArgs e)
         {
 
-            Form1.pattern.Clear();
+            Form1.pattHard.Clear();
             Refresh();
             Thread.Sleep(700);
             ComputerTurn();
@@ -38,78 +32,69 @@ namespace SimonSays
         private void ComputerTurn()
         {
             Random randPatt = new Random();
-            pattPatt = randPatt.Next(0, 4);
-            Form1.pattern.Add(pattPatt);
-            final++;
+            pattPatt2 = randPatt.Next(0, 4);
+            Form1.pattHard.Add(pattPatt2);
 
 
             for (int i = 0; i < Form1.pattern.Count; i++)
             {
-                if (Form1.pattern[i] == 0)
+                if (Form1.pattHard[i] == 0)
                 {
                     Refresh();
                     Thread.Sleep(200);
-                    Form1.green.Play();
-                    greenButton.BackColor = Color.White;
+                    greenButton2.BackColor = Color.White;
                     Refresh();
                     Thread.Sleep(200);
-                    greenButton.BackColor = Color.ForestGreen;
-                    
+                    greenButton2.BackColor = Color.ForestGreen;
                 }
                 else if (Form1.pattern[i] == 1)
                 {
                     Refresh();
                     Thread.Sleep(200);
-                    Form1.red.Play();
-                    redButton.BackColor = Color.White;
+                    redButton2.BackColor = Color.White;
                     Refresh();
                     Thread.Sleep(200);
-                    redButton.BackColor = Color.DarkRed;
-                    
+                    redButton2.BackColor = Color.DarkRed;
                 }
                 else if (Form1.pattern[i] == 2)
                 {
                     Refresh();
                     Thread.Sleep(200);
-                    Form1.yellow.Play();
-                    yellowButton.BackColor = Color.White;
+                    yellowButton2.BackColor = Color.White;
                     Refresh();
                     Thread.Sleep(200);
-                    yellowButton.BackColor = Color.Goldenrod;
-                    
+                    yellowButton2.BackColor = Color.Goldenrod;
                 }
                 else if (Form1.pattern[i] == 3)
                 {
                     Refresh();
                     Thread.Sleep(200);
-                    Form1.blue.Play();
-                    blueButton.BackColor = Color.White;
+                    blueButton2.BackColor = Color.White;
                     Refresh();
                     Thread.Sleep(200);
-                    blueButton.BackColor = Color.DarkBlue;
-                    
+                    blueButton2.BackColor = Color.DarkBlue;
                 }
             }
-            guess = 0;
+            guess2 = 0;
 
         }
-        private void greenButton_Click(object sender, EventArgs e)
+        private void greenButton2_Click(object sender, EventArgs e)
         {
 
-            if (Form1.pattern[guess] == 0)
+            if (Form1.pattern[guess2] == 0)
             {
-                greenButton.BackColor = Color.White;
+                greenButton2.BackColor = Color.White;
                 Form1.green.Play();
                 Refresh();
                 Thread.Sleep(200);
-                greenButton.BackColor = Color.ForestGreen;
-                guess += 1;
+                greenButton2.BackColor = Color.ForestGreen;
+                guess2 += 1;
             }
             else
             {
                 GameOver();
             }
-            if (Form1.pattern.Count == guess)
+            if (Form1.pattern.Count == guess2)
             {
                 ComputerTurn();
             }
@@ -119,65 +104,63 @@ namespace SimonSays
             Form1.mistake.Play();
             Form1.ChangeScreen(this, new GameOverScreen());
         }
-        private void redButton_Click(object sender, EventArgs e)
+        private void redButton2_Click(object sender, EventArgs e)
         {
-            if (Form1.pattern[guess] == 1)
+            if (Form1.pattern[guess2] == 1)
             {
-                redButton.BackColor = Color.White;
+                redButton2.BackColor = Color.White;
                 Form1.red.Play();
                 Refresh();
                 Thread.Sleep(200);
-                redButton.BackColor = Color.DarkRed;
-                guess += 1;
-                
+                redButton2.BackColor = Color.DarkRed;
+                guess2 += 1;
             }
             else
             {
                 GameOver();
             }
-            if (Form1.pattern.Count == guess)
+            if (Form1.pattern.Count == guess2)
             {
                 ComputerTurn();
             }
         }
-        private void yellowButton_Click(object sender, EventArgs e)
+        private void yellowButton2_Click(object sender, EventArgs e)
         {
-            if (Form1.pattern[guess] == 2)
+            if (Form1.pattern[guess2] == 2)
             {
-                yellowButton.BackColor = Color.White;
-                Form1.yellow.Play();
+                yellowButton2.BackColor = Color.White;
+                Form1.green.Play();
                 Refresh();
                 Thread.Sleep(200);
-                yellowButton.BackColor = Color.Goldenrod;
-                guess += 1;
-                
+                yellowButton2.BackColor = Color.Goldenrod;
+                guess2 += 1;
             }
             else
             {
                 GameOver();
             }
-            if (Form1.pattern.Count == guess)
+            if (Form1.pattern.Count == guess2)
             {
                 ComputerTurn();
             }
         }
-        private void blueButton_Click(object sender, EventArgs e)
+        private void blueButton2_Click(object sender, EventArgs e)
         {
-            if (Form1.pattern[guess] == 3)
+            if (Form1.pattern[guess2] == 3)
             {
-                blueButton.BackColor = Color.White;
-                Form1.blue.Play();
+                blueButton2.BackColor = Color.White;
+                Form1.green.Play();
                 Refresh();
                 Thread.Sleep(200);
-                blueButton.BackColor = Color.DarkBlue;
-                guess += 1;
+                blueButton2.BackColor = Color.DarkBlue;
+                guess2 += 1;
             }
             else
             {
                 GameOver();
             }
 
-            if (Form1.pattern.Count == guess)
+            if (Form1.pattern.Count == guess2)
             {
                 ComputerTurn();
             }
